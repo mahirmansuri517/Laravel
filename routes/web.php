@@ -7,6 +7,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Customer;
 use App\Http\Controllers\CustomerController;
+use Illuminate\Http\Request;
 
 
 /*
@@ -37,7 +38,32 @@ Route::get('/customer/create', [CustomerController::class, 'create'])->name('cus
 Route::post('/customer', [CustomerController::class, 'register']);
 
 Route::get('/customer', [CustomerController::class, 'view']);
+Route::get('/customer/trash', [CustomerController::class, 'trash']);
 Route::get('/',function(){
     return view('index');
 });
+Route::get('/customer/restore/{id}',[CustomerController::class, 'restore'])->name('customer.restore');
+Route::get('/customer/force-delete/{id}',[CustomerController::class, 'forceDelete'])->name('customer.force-delete');
 Route::get('/customer/delete/{id}',[CustomerController::class, 'delete'])->name('customer.delete');
+Route::get('/customer/edit/{id}',[CustomerController::class, 'edit'])->name('customer.edit');
+Route::post('/customer/update/{id}',[CustomerController::class, 'update'])->name('customer.update');
+
+Route::get('get-all-session',function(){
+    $session = session()->all();
+    p($session);
+});
+
+Route::get('set-session', function(Request $request){
+    $request->session()->put('user_name', 'Mujir Shaikh');
+    $request->session()->put('user_id', '123');
+    return redirect('get-all-session');
+});
+
+Route::get('destroy-session', function(){
+    session()->forget('user_name');
+    session()->forget('user_id');
+    
+    return redirect('get-all-session');
+
+});
+

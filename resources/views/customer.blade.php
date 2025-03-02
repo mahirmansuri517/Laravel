@@ -25,7 +25,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -41,24 +41,24 @@
                 </div>
             </div>
         </nav>
-        
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-white bg-primary">Customer Registration</div>
+                    <div class="card-header text-white bg-primary">{{$title}}</div>
 
                     <div class="card-body">
-                        <form method="post" action="{{ url('/') }}/customer">
+                        <form method="post" action="{{$url}}">
                             @csrf
 
                             <!-- Name -->
                             <div class="mb-3">
                                 <label class="form-label">Name*</label>
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control" name="name" value="{{ old('name', $customer->name ?? '') }}"/>
                                 <span class="text-danger">
                                     @error('name')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -66,10 +66,10 @@
                             <!-- Email -->
                             <div class="mb-3">
                                 <label class="form-label">Email*</label>
-                                <input type="email" class="form-control" name="email" required>
+                                <input type="email" class="form-control" name="email" value="{{ old('email', $customer->email ?? '') }}"/>
                                 <span class="text-danger">
                                     @error('email')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -77,10 +77,10 @@
                             <!-- Password -->
                             <div class="mb-3">
                                 <label class="form-label">Password*</label>
-                                <input type="password" class="form-control" name="password" required>
+                                <input type="password" class="form-control" name="password"/>
                                 <span class="text-danger">
                                     @error('password')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -88,10 +88,10 @@
                             <!-- Confirm Password -->
                             <div class="mb-3">
                                 <label class="form-label">Confirm Password*</label>
-                                <input type="password" class="form-control" name="confirm_password" required>
+                                <input type="password" class="form-control" name="confirm_password"/>
                                 <span class="text-danger">
                                     @error('confirm_password')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -99,10 +99,10 @@
                             <!-- Country -->
                             <div class="mb-3">
                                 <label class="form-label">Country</label>
-                                <input type="text" class="form-control" name="country">
+                                <input type="text" class="form-control" name="country" value="{{ old('country', $customer->country ?? '') }}"/>
                                 <span class="text-danger">
                                     @error('country')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -110,10 +110,10 @@
                             <!-- State -->
                             <div class="mb-3">
                                 <label class="form-label">State</label>
-                                <input type="text" class="form-control" name="state">
+                                <input type="text" class="form-control" name="state" value="{{ old('state', $customer->state ?? '') }}">
                                 <span class="text-danger">
                                     @error('state')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
@@ -121,14 +121,14 @@
                             <!-- Address -->
                             <div class="mb-3">
                                 <label class="form-label">Address</label>
-                                <textarea class="form-control" name="address"></textarea>
+                                <textarea class="form-control" name="address">{{ old('address', $customer->address ?? '') }}</textarea>
                                 <span class="text-danger">
                                     @error('address')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
-{{-- 
+{{--
                             <!-- Gender -->
                             <div class="mb-3">
                                 <label class="form-label">Gender</label>
@@ -140,7 +140,7 @@
                                 </select>
                                 <span class="text-danger">
                                     @error('gender')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div> --}}
@@ -148,10 +148,10 @@
                             <!-- Date of Birth -->
                             <div class="mb-3">
                                 <label class="form-label">Date of Birth</label>
-                                <input type="date" class="form-control" name="dob">
+                                <input type="date" class="form-control" name="dob" value="{{ old('dob', $customer->dob ?? '') }}">
                                 <span class="text-danger">
                                     @error('dob')
-                                        {{ message }}
+                                        {{ $message }}
                                     @enderror
                                 </span>
                             </div>
